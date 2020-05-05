@@ -135,7 +135,7 @@ def edituser(request,id):
         "edit_user_id": edit_user
     }
 
-    return render (request,'editaccount.html')
+    return render (request,'editaccount.html', context)
 
 def destroy(request, id):
     deleted_post = Wall_Quote.objects.get(id=id)
