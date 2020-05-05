@@ -48,9 +48,6 @@ class UserManager(models.Manager):
 
             errors['email'] = "Invalid email address!"
 
-        if len(useremail) > 0:
-
-            errors['emailexist'] = "User has registered with this email already!!"
 
         if len(userfirstname) > 0:
 
