@@ -66,6 +66,9 @@ def quotes(request):
 
 def process_quote(request):
 
+    if 'user' not in request.session:
+        return redirect('/')
+
     errors = Wall_Quote.objects.basic_validator(request.POST)
 
     if len(errors) > 0:
@@ -78,6 +81,10 @@ def process_quote(request):
 
 
 def profile(request,id):
+
+    if 'user' not in request.session:
+        return redirect('/')
+
     context={
         'user' : User.objects.get(id=id)
         }
@@ -93,6 +100,9 @@ def add_like(request,id):
     return redirect('/quotes')
 
 def updateaccount(request,id):
+
+    if 'user' not in request.session:
+        return redirect('/')
 
     if request.method == "POST":
 
@@ -114,6 +124,9 @@ def updateaccount(request,id):
         return redirect('/quotes')
 
 def edituser(request,id):
+
+    if 'user' not in request.session:
+        return redirect('/')
 
     edit_user = User.objects.get(id=id)
 
