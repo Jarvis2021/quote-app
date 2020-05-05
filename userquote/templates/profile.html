@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> User Quotes </title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/quotestyle.css' %}">
+</head>
+<body>
+
+  <div class="container">
+
+    <br>
+    <a id="back" href="/quotes">Back</a>
+
+    <form action="/logout" method='POST'>
+        {% csrf_token %}
+      <input id="button1" type="submit" name="logout" value="Logout">
+    </form>
+
+
+    <p id="quotesheader1"> {{user.first_name}} {{user.last_name}}'s  Quotes </p>
+
+    {% for post in user.usermessages.all %}
+    <div class='userposts'>
+      <p id="quotearea1" >{{post.author}}: {{post.message}}</p><br>
+    </div>
+    {% endfor %}
+  </div>
+
+</body>
+</html>

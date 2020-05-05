@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quote Dashboard</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/quotestyle.css' %}">
+</head>
+<body>
+  <div class="container">
+
+    <div id="error_messages">
+
+      {% for message in messages %}
+      <ul>
+        <li> {{message}}</li>
+      </ul>
+
+      {% endfor %}
+    </div>
+
+    <h5> Welcome User {{request.session.user}} !</h5>
+    <a id="accountedit" href="/my_profile/{{request.session.id}}"> Edit My Account</a>
+    <form action="/logout" method='POST'>
+        {% csrf_token %}
+      <input id="button1" type="submit" name="logout" value="Logout">
+    </form>
+
+    <div class='forms'>
+
+      <p style="margin-left: 200px;"> Quotes </p>
+
+      {% for post in author_quotes %}
+      <div class='one_post'>
+        <p id="quotearea1" name="message" >{{post.author}}: {{post.message}}</p>
+        <p id='poster'>Posted By: <a href="/user_profile/{{post.poster_id}}">{{post.poster.first_name}} {{post.poster.last_name}}</a></p>
+        <p id="likes">{{post.user_likes.count}} people like this </p>
+        <a id ="userlikes" href="/like/{{post.id}}"></post> Like! </a>
+        {% if request.session.id is post.poster.id %}
+        <a id="deletequote" style="font-size:14px" href="/delete/{{post.id}}"> Delete </a>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    <div class="forms">
+      <form action="/process_quote" method='POST'>
+        {% csrf_token %}
+      <p id="addquote"> Add a Quote! </p>
+      <label> Author </label>
+      <input type="text" name="authorname"><br><br>
+      <label> Quote </label>
+      <textarea id="quotearea2" name="userquote" rows="8" cols="80"></textarea>
+      <input id="button2" type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+</body>
+</html>

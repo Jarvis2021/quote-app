@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Edit Account</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/quotestyle.css' %}">
+</head>
+<body>
+
+  <div class="container">
+    <div id="error_messages">
+
+      {% for message in messages %}
+      <ul>
+        <li> {{message}}</li>
+      </ul>
+
+      {% endfor %}
+    </div>
+    <br>
+    <h5> Edit My Account </h5>
+    <a id="back" href="/quotes">Back</a>
+
+    <form action="/logout" method='POST'>
+        {% csrf_token %}
+      <input id="button1" type="submit" name="logout" value="Logout">
+    </form>
+
+    <div class="editform">
+
+      <form action="/updateaccount/{{request.session.id}}" method="post">
+          {% csrf_token %}
+        <label id="editlabel"> First Name </label>
+        <input id="editinput" type="textarea" name="fname" placeholder={{request.session.user}}> <br><br>
+        <label id="editlabel"> Last Name </label>
+        <input id="editinput" type="textarea" name="lname" placeholder={{request.session.lname}}> <br><br>
+        <label id="editlabel"> Email </label>
+        <input id="editemail" type="textarea" name="email" placeholder={{request.session.email}}> <br><br>
+        <input id="button3" type="submit" name="updateuser" value="Update">
+      </form>
+
+    </div>
+
+</body>
+</html>

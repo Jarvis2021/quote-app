@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> User Login and Registration </title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static '/css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+
+    <div id="error_messages">
+
+      {% for message in messages %}
+
+      <ul>
+        <li> {{message}}</li>
+      </ul>
+
+      {% endfor %}
+
+      <p>{{loginstatus}}</p>
+
+    </div>
+
+    <div class="forms">
+      <h3> Register </h3>
+      <form action="/register" method='POST'>
+        {% csrf_token %}
+      <label> First Name </label>
+      <input type="text" name="fname"> <br>
+      <label> Last Name </label>
+      <input type="text" name="lname"> <br>
+      <label> Email </label>
+      <input id="emailinput" type="text" name="email"> <br>
+      <label> Password </label>
+      <input id="pwdinput" type="password" name="pwd"> <br>
+      <label> Confirm PW </label>
+      <input id="cpwdinput"type="password" name="confpwd"><br><br>
+      <input id="button" type="submit" value="Register">
+      </form>
+    </div>
+    <div class="forms">
+      <h3> Login </h3>
+      <form action="/login" method='POST'>
+        {% csrf_token %}
+      <label> Email </label>
+      <input id="lemailinput" type="text" name="email"><br>
+      <label> Password </label>
+      <input id="lpwdinput" type="password" name="pwd"><br>
+      <input id="button" type="submit" value="Log In">
+      </form>
+    </div>
+
+  </div>
+
+</body>
+</html>
